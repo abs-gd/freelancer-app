@@ -36,8 +36,8 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-const AlterType = new GraphQLObjectType({
-  name: "Alter",
+const ProjectType = new GraphQLObjectType({
+  name: "Project",
   fields: () => ({
     id: { type: GraphQLString },
     name: { type: GraphQLString },
@@ -122,4 +122,108 @@ const IncomeType = new GraphQLObjectType({
     product: { type: GraphQLString },
   },
 });
+
+
+/*
+ * QUERIES
+ ****************************************************************************************/
+const GetUserQuery = {
+  type: UserType,
+  async resolve(_, __, req) {
+    const userId = authMiddleware(req);
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found");
+
+    return user;
+  },
+};
+
+const GetProjectsQuery = {
+  type: new GraphQLList(ProjectType),
+  async resolve(_, __, context) {
+    const userId = authMiddleware(context);
+    if (!userId) throw new Error("Authentication required");
+
+    return await Project.find({ userId });
+  },
+};
+
+const GetKanbanTasksQuery = {
+  type: new GraphQLList(KanbanTaskType),
+  args: {
+    projectId: { type: GraphQLString },
+  },
+  async resolve(_, { projectId }, context) {
+    authMiddleware(context);
+    return await KanbanTask.find({ projectId }).sort({ createdAt: -1 });
+  },
+};
+
+const GetFavoritesQuery = {
+  type: new GraphQLList(FavoriteType),
+  args: {
+    projectId: { type: GraphQLString },
+  },
+  async resolve(_, { projectId }, context) {
+    authMiddleware(context);
+    return await Favorite.find({ projectId }).sort({ category: 1, title: 1 });
+  },
+};
+
+const GetNotesQuery = {
+  type: new GraphQLList(NoteType),
+  args: {
+    projectId: { type: GraphQLString },
+  },
+  async resolve(_, { projectId }, context) {
+    authMiddleware(context);
+    return await Note.find({ projectId }).sort({
+      category: 1,
+      pinned: -1,
+      updatedAt: -1,
+    });
+  },
+};
+
+const GetDailyTasksQuery = {
+  type: new GraphQLList(DailyTaskType),
+  args: {
+    projectId: { type: GraphQLString },
+  },
+  async resolve(_, { projectId }) {
+    const today = new Date().toISOString().slice(0, 10);
+    const tasks = await DailyTask.find({ projectId });
+
+    // Ensure every task has a completion for today
+    for (let task of tasks) {
+      if (!task.completions.find((c) => c.date === today)) {
+        task.completions.push({ date: today, done: false });
+        await task.save();
+      }
+    }
+
+    return tasks;
+  },
+};
+
+const GetAllDailyTasksQuery = {
+  type: new GraphQLList(DailyTaskType),
+  async resolve() {
+    return await DailyTask.find({});
+  },
+};
+
+const GetIncomeQuery = {
+  type: new GraphQLList(IncomeType),
+  args: {
+    page: { type: GraphQLInt },
+    limit: { type: GraphQLInt },
+  },
+  async resolve(_, { page = 1, limit = 250 }) {
+    return await Income.find({})
+      .sort({ date: -1 })
+      .skip((page - 1) * limit)
+      .limit(limit);
+  },
+};
 
