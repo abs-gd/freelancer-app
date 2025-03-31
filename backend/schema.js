@@ -838,3 +838,67 @@ const UpdateIncomeMutation = {
     return await Income.findByIdAndUpdate(id, updates, { new: true });
   },
 };
+
+
+
+
+/****************************************************************************************
+ * EXPORTS                                                                              *
+ ****************************************************************************************/
+/* Root Query */
+const RootQuery = new GraphQLObjectType({
+  name: "RootQueryType",
+  fields: {
+    getUser: GetUserQuery,
+    getProjectss: GetProjectsQuery,
+    getKanbanTasks: GetKanbanTasksQuery,
+    getFavorites: GetFavoritesQuery,
+    getNotes: GetNotesQuery,
+    getDailyTasks: GetDailyTasksQuery,
+    getAllDailyTasks: GetAllDailyTasksQuery,
+    getIncome: GetIncomeQuery,
+  },
+});
+
+/* Mutations */
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    register: RegisterMutation, // Public
+    login: LoginMutation, // Public
+    setup2FA: Setup2FAMutation, // Protected
+    verify2FA: Verify2FAMutation, // Protected
+    addProject: AddProjectMutation,
+    updateProject: UpdateProjectMutation,
+    deleteProject: DeleteProjectMutation,
+    switchActiveProject: SwitchActiveProjectMutation,
+    addKanbanTask: AddKanbanTaskMutation,
+    updateKanbanTaskStatus: UpdateKanbanTaskStatusMutation,
+    deleteKanbanTask: DeleteKanbanTaskMutation,
+    updateKanbanTaskTitle: UpdateTaskTitleMutation,
+    addSubtask: AddSubtaskMutation,
+    toggleSubtask: ToggleSubtaskMutation,
+    deleteSubtask: DeleteSubtaskMutation,
+    addFavorite: AddFavoriteMutation,
+    deleteFavorite: DeleteFavoriteMutation,
+    updateFavorite: UpdateFavoriteMutation,
+    addNote: AddNoteMutation,
+    updateNote: UpdateNoteMutation,
+    deleteNote: DeleteNoteMutation,
+    updateNoteMeta: UpdateNoteMetaMutation,
+    toggleNotePin: ToggleNotePinMutation,
+    addDailyTask: AddDailyTaskMutation,
+    toggleDailyTask: ToggleDailyTaskMutation,
+    deleteDailyTask: DeleteDailyTaskMutation,
+    updateDailyTaskTitle: UpdateDailyTaskTitleMutation,
+    addIncome: AddIncomeMutation,
+    deleteIncome: DeleteIncomeMutation,
+    updateIncome: UpdateIncomeMutation,
+  },
+});
+
+/* Export */
+module.exports = new GraphQLSchema({
+  query: RootQuery,
+  mutation: Mutation,
+});
