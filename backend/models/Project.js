@@ -8,6 +8,7 @@ const ProjectSchema = new mongoose.Schema({
     type: Object,
     default: { time: Date.now(), blocks: [], version: "2.27.0" },
   },
+  projectHistory: [{ timestamp: Date }], // Log of project switching times
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);
