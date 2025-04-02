@@ -47,6 +47,7 @@ const ProjectType = new GraphQLObjectType({
     name: { type: GraphQLString },
     color: { type: GraphQLString },
     note: { type: GraphQLJSON },
+    isActive: { type: GraphQLBoolean },
     projectHistory: { type: new GraphQLList(GraphQLString) },
   }),
 });

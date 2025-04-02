@@ -8,6 +8,7 @@ const ProjectSchema = new mongoose.Schema({
     type: Object,
     default: { time: Date.now(), blocks: [], version: "2.27.0" },
   },
+  isActive: { type: Boolean, default: false }, // Tracks if this project is currently active
   projectHistory: [{ timestamp: Date }], // Log of project switching times
 });
 

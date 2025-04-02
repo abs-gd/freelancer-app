@@ -131,7 +131,7 @@ function Navbar() {
             {/* <NavLink href="/">Home</NavLink>*/}
             <NavLink href="/dashboard">Dashboard</NavLink>
             <NavLink href="/dailies-overview">Dailies all</NavLink>
-            <NavLink href="/project">Projects</NavLink>
+            <NavLink href="/projects">Projects</NavLink>
             <NavLink href="/kanban">Kanban</NavLink>
             <NavLink href="/kanban-overview">KB all</NavLink>
             <NavLink href="/favorites">Favorites</NavLink>
@@ -154,7 +154,7 @@ function Navbar() {
                 <NavLinkMobile href="/dailies-overview">
                   Dailies all
                 </NavLinkMobile>
-                <NavLinkMobile href="/project">Projects</NavLinkMobile>
+                <NavLinkMobile href="/projects">Projects</NavLinkMobile>
                 <NavLinkMobile href="/kanban">Kanban</NavLinkMobile>
                 <NavLinkMobile href="/kanban-overview">KB all</NavLinkMobile>
                 <NavLinkMobile href="/favorites">Favorites</NavLinkMobile>
@@ -174,13 +174,13 @@ function Navbar() {
           )}
 
           <div>
-            {data && data.getProject.length > 0 && (
+            {data && data.getProjects.length > 0 && (
               <select
                 className="text-pink-400 font-bold cursor-pointer bg-pink-100 p-3 hover:bg-fuchsia-200 md:h-auto h-17 md:w-auto"
                 onChange={(e) => handleSwitch(e.target.value)}
                 value={activeProject ? activeProject.id : ""}
               >
-                {data.getProject.map((project) => (
+                {data.getProjects.map((project) => (
                   <option key={project.id} value={project.id}>
                     {project.name} {project.isActive ? "" : ""}
                   </option>
