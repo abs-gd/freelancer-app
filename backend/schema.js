@@ -850,7 +850,7 @@ const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
     getUser: GetUserQuery,
-    getProjectss: GetProjectsQuery,
+    getProjects: GetProjectsQuery,
     getKanbanTasks: GetKanbanTasksQuery,
     getFavorites: GetFavoritesQuery,
     getNotes: GetNotesQuery,
