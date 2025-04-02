@@ -39,10 +39,11 @@ const apiLimiter = rateLimit({
     res.status(options.statusCode).send(options.message);
   },*/
 });
+/* TURNED OFF FOR TESTING IN DEVELOPMENT
 app.use("/", apiLimiter);
 app.use("/graphql", apiLimiter);
 app.use("/api", apiLimiter);
-
+*/
 // Connect to MongoDB
 const clientOptions = {
   serverApi: { version: "1", strict: true, deprecationErrors: true },
