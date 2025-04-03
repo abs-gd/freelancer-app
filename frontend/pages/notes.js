@@ -226,8 +226,8 @@ function NotesPage() {
   const [editForm, setEditForm] = useState({});
 
   return (
-    <div className="md:p-5 p-1 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">🗂 Notes</h1>
+    <div className="md:p-6 p-3">
+      <h1 className="text-4xl font-medium mb-6">📝 Notes</h1>
 
       {/* Tabs */}
       <div className="flex gap-2 md:mb-4 mb-2 flex-wrap">
@@ -235,10 +235,10 @@ function NotesPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded ${
+            className={`capitalize px-4 py-2 rounded ${
               activeCategory === cat
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 cursor-pointer"
+                ? "bg-green-600 text-white"
+                : "bg-green-200 cursor-pointer"
             }`}
           >
             {cat}
@@ -252,11 +252,11 @@ function NotesPage() {
           {grouped[activeCategory]?.map((note) => (
             <div
               key={note.id}
-              className={`p-3 rounded shadow cursor-text border ${
+              className={`hover:bg-green-100 p-3 rounded shadow cursor-text border ${
                 activeNote?.id === note.id
-                  ? "border-blue-500"
+                  ? "border-green-500 bg-green-100"
                   : note.pinned
-                  ? "border-yellow-400"
+                  ? "border-yellow-400 bg-yellow-100"
                   : "bg-white"
               }`}
               onClick={() => !editing[note.id] && setActiveNote(note)}
@@ -319,12 +319,12 @@ function NotesPage() {
               ) : (
                 <div className="flex justify-between items-start">
                   <div className="">
-                    <span className="font-medium">{note.title}</span>
+                    <span className="font-medium capitalize">{note.title}</span>
                     <span className="text-xs text-gray-400 ml-2">
                       {new Date(note.updatedAt).toLocaleString()}
                     </span>
                   </div>
-                  <div className="flex gap-2 text-xs">
+                  <div className="flex gap-1 text-xs">
                     <button
                       onClick={async (e) => {
                         e.stopPropagation();
@@ -385,7 +385,7 @@ function NotesPage() {
           />
           <button
             onClick={handleSave}
-            className="mt-4 bg-green-600 text-white px-4 py-2 rounded cursor-pointer"
+            className="mt-4 bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer"
           >
             Save note
           </button>
@@ -393,8 +393,10 @@ function NotesPage() {
       )}
 
       {/* Add New Note */}
-      <div className="bg-gray-100 md:p-4 p-2 rounded w-full mt-10">
-        <h2 className="text-lg font-semibold md:mb-4 mb-2 text-center">➕ New note</h2>
+      <div className="bg-green-100 md:p-4 p-2 rounded w-full mt-20">
+        <h2 className="text-2xl font-medium md:mb-4 mb-2 text-center">
+          Add new note
+        </h2>
         <div className="md:flex md:justify-between w-full md:gap-2">
           <input
             type="text"
@@ -412,7 +414,7 @@ function NotesPage() {
           />
           <button
             onClick={handleAddNote}
-            className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer h-[52px] md:w-fit w-full"
+            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer h-[50px] md:w-fit w-full"
           >
             Create
           </button>

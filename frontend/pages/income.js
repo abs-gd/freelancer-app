@@ -96,19 +96,19 @@ export default function IncomePage() {
   };
 
   return (
-    <div className="md:p-5 p-1">
-      <h1 className="text-2xl font-bold md:mb-4 mb-1">💶 Income Tracker</h1>
+    <div className="md:p-6 p-3">
+      <h1 className="text-4xl font-medium mb-6">💶 Income tracker</h1>
 
       <form
         onSubmit={handleSubmit}
-        className="md:flex md:gap-4 md:mb-5 mb-2 w-full"
+        className="md:flex md:gap-2 md:mb-5 mb-2 w-full"
       >
         <input
           type="date"
           value={form.date}
           onChange={(e) => setForm({ ...form, date: e.target.value })}
           required
-          className="border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
+          className="hover:bg-green-100 border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
         />
         <input
           type="number"
@@ -117,13 +117,13 @@ export default function IncomePage() {
           value={form.amount}
           onChange={(e) => setForm({ ...form, amount: e.target.value })}
           required
-          className="border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
+          className="hover:bg-green-100 border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
         />
         <select
           value={form.site_or_stream}
           onChange={(e) => setForm({ ...form, site_or_stream: e.target.value })}
           required
-          className="border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
+          className="hover:bg-green-100 border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
         >
           <option value="">Platform or Stream</option>
           <option value="Udemy">Udemy</option>
@@ -136,7 +136,7 @@ export default function IncomePage() {
           value={form.product}
           onChange={(e) => setForm({ ...form, product: e.target.value })}
           required
-          className="border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
+          className="hover:bg-green-100 border p-2 rounded h-[50px] md:w-fit w-full md:mb-0 mb-2"
         >
           <option value="">Product</option>
           <option value="Course sale">Course sale</option>
@@ -149,7 +149,7 @@ export default function IncomePage() {
         </select>
         <button
           type="submit"
-          className="col-span-1 md:col-span-4 bg-green-700 text-white py-2 px-10 rounded cursor-pointer h-[50px] md:w-fit w-full md:mb-0 mb-2"
+          className="col-span-1 md:col-span-4 bg-green-600 hover:bg-green-500 text-white py-2 px-10 rounded cursor-pointer h-[50px] md:w-fit w-full md:mb-0 mb-2"
         >
           Add
         </button>
@@ -160,19 +160,19 @@ export default function IncomePage() {
       ) : (
         <>
           <table className="w-full border text-sm mb-4 md:max-w-fit">
-            <thead className="bg-gray-200 text-left">
+            <thead className="bg-green-300 text-left">
               <tr>
                 <th className="md:p-2 p-1">Date</th>
-                <th className="md:p-2 p-1">€</th>
-                <th className="md:p-2 p-1">Income Stream</th>
+                <th className="md:p-2 p-1">Amount</th>
+                <th className="md:p-2 p-1">Income stream</th>
                 <th className="md:p-2 p-1">Product</th>
                 <th className=""></th>
               </tr>
             </thead>
             <tbody>
               {data.getIncome.map((entry) => (
-                <tr key={entry.id} className="border-t hover:bg-pink-200">
-                  <td className="md:p-2 p-1">{entry.date}</td>
+                <tr key={entry.id} className="border-t hover:bg-green-200">
+                  <td className="md:p-2 p-1 md:w-fit w-full">{entry.date}</td>
                   <td className="md:p-2 p-1">
                     €{Number(entry.amount).toFixed(2)}
                   </td>
@@ -206,7 +206,7 @@ export default function IncomePage() {
           {editing && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
               <div className="bg-white p-5 rounded shadow max-w-md w-full relative">
-                <h2 className="text-xl font-bold mb-4">Edit Entry</h2>
+                <h2 className="text-xl font-bold mb-4">Edit entry</h2>
 
                 <form
                   onSubmit={async (e) => {
@@ -237,7 +237,7 @@ export default function IncomePage() {
                       setEditing({ ...editing, date: e.target.value })
                     }
                     required
-                    className="border p-2 rounded w-full"
+                    className="hover:bg-green-100 border p-2 rounded w-full"
                   />
                   <input
                     type="number"
@@ -246,7 +246,7 @@ export default function IncomePage() {
                       setEditing({ ...editing, amount: e.target.value })
                     }
                     required
-                    className="border p-2 rounded w-full"
+                    className="hover:bg-green-100 border p-2 rounded w-full"
                   />
                   <select
                     value={editing.site_or_stream}
@@ -254,7 +254,7 @@ export default function IncomePage() {
                       setEditing({ ...editing, site_or_stream: e.target.value })
                     }
                     required
-                    className="border p-2 rounded w-full"
+                    className="hover:bg-green-100 border p-2 rounded w-full"
                   >
                     <option value="">Platform or Stream</option>
                     <option value="Udemy">Udemy</option>
@@ -269,7 +269,7 @@ export default function IncomePage() {
                       setEditing({ ...editing, product: e.target.value })
                     }
                     required
-                    className="border p-2 rounded w-full"
+                    className="hover:bg-green-100 border p-2 rounded w-full"
                   >
                     <option value="">Product</option>
                     <option value="Course sale">Course sale</option>
@@ -280,9 +280,7 @@ export default function IncomePage() {
                     <option value="Website development">
                       Website development
                     </option>
-                    <option value="1 hour consultancy">
-                      Consultancy
-                    </option>
+                    <option value="1 hour consultancy">Consultancy</option>
                     <option value="Blog affiliate income">
                       Blog affiliate income
                     </option>
@@ -292,14 +290,14 @@ export default function IncomePage() {
                   <div className="flex justify-between mt-4">
                     <button
                       type="submit"
-                      className="bg-green-700 text-white py-2 px-4 rounded cursor-pointer"
+                      className="bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded cursor-pointer"
                     >
                       Save
                     </button>
                     <button
                       type="button"
                       onClick={() => setEditing(null)}
-                      className="text-gray-500 cursor-pointer"
+                      className="text-gray-500 hover:text-gray-800 cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -313,14 +311,14 @@ export default function IncomePage() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-3 py-2 rounded bg-gray-200 cursor-pointer"
+              className="px-3 py-2 rounded bg-gray-200 hover:bg-green-200 cursor-pointer"
             >
               ← Prev
             </button>
             <span className="py-2 px-3">Page {page}</span>
             <button
               onClick={() => setPage((p) => p + 1)}
-              className="px-3 py-2 rounded bg-gray-200 cursor-pointer"
+              className="px-3 py-2 rounded bg-gray-200 hover:bg-green-200 cursor-pointer"
             >
               Next →
             </button>

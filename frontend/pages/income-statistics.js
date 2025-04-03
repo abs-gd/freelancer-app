@@ -173,7 +173,7 @@ export default function IncomeStatistics() {
 
     return (
       <div className="mb-10">
-        <h2 className="text-xl font-semibold mb-2">{title}</h2>
+        <h2 className="text-xl md:text-center font-semibold mb-2">{title}</h2>
         <div className="w-full flex justify-center">
           <PieChart width={400} height={300}>
             <Pie
@@ -207,15 +207,13 @@ export default function IncomeStatistics() {
   };
 
   return (
-    <div className="md:p-5 p-1">
+    <div className="md:p-6 p-3">
       <div className="flex justify-between">
-        <h1 className="md:text-2xl text-lg block md:mt-0 mt-2 mb-auto font-bold md:mb-6">
-          📊 Income Statistics
-        </h1>
-        <div className="mb-6 flex md:gap-4 gap-1">
+        <h1 className="text-4xl font-medium mb-6">📊 Income Statistics</h1>
+        <div className="mb-6 md:flex md:w-1/5 md:h-[50px] md:gap-4 gap-1">
           <button
             onClick={() => setView("charts")}
-            className={`md:px-4 md:py-2 p-2 rounded ${
+            className={`md:px-4 md:py-2 p-2 md:mb-0 w-full mb-2 rounded ${
               view === "charts"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 cursor-pointer"
@@ -225,7 +223,7 @@ export default function IncomeStatistics() {
           </button>
           <button
             onClick={() => setView("tables")}
-            className={`md:px-4 md:py-2 p-2 rounded ${
+            className={`md:px-4 md:py-2 p-2 w-full rounded ${
               view === "tables"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 cursor-pointer"
@@ -255,7 +253,7 @@ export default function IncomeStatistics() {
           <div className="md:flex md:w-full md:gap-6">
             {renderChart("Total by Month", stats.byMonth)}
           </div>
-          <div className="md:flex md:w-full md:gap-6 md:mb-0 mb-40">
+          <div className="md:grid md:grid-cols-2 md:w-full md:gap-6 md:mb-0 mb-40">
             {renderPieChart("Total by Platform", stats.byPlatform)}
             {renderPieChart("Total by Product", stats.byProduct)}
           </div>

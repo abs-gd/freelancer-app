@@ -60,8 +60,8 @@ export default function DailyOverview() {
   if (loading) return <p className="p-5">Loading tasks...</p>;
 
   return (
-    <div className="md:p-5 p-1">
-      <h1 className="text-2xl font-bold md:mb-5 mb-2">🗓️ Daily Tasks Overview</h1>
+    <div className="md:p-6 p-3">
+      <h1 className="text-4xl font-medium mb-6">🗓️ Daily tasks overview</h1>
       <div className="md:grid md:grid-cols-4 md:gap-6">
         {Object.entries(tasksByProject).map(
           ([projectId, { name, color, tasks }]) => (

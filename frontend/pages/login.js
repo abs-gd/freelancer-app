@@ -51,9 +51,9 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl mb-4">Login</h1>
-      <form onSubmit={handleLogin} className="flex flex-col space-y-3">
+    <div className="p-6 flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl mb-6">👤 Login</h1>
+      <form onSubmit={handleLogin} className="flex flex-col space-y-2">
         <input
           type="email"
           placeholder="Email"
@@ -85,7 +85,7 @@ export default function Login() {
           onExpire={() => setCaptchaToken("")}
         />
         */}
-        <button className="bg-blue-500 text-white p-2 rounded">Login</button>
+        <button className="bg-green-600 hover:bg-green-500 text-white p-2 rounded cursor-pointer">Login</button>
       </form>
     </div>
   );

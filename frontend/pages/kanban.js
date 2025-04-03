@@ -219,25 +219,25 @@ export default function KanbanPage() {
 
   return (
     <>
-      <div className="md:p-5 p-2">
-        <div className="flex justify-start">
-          <h1 className="text-2xl mb-4">
+      <div className="md:p-6 p-1 pt-3">
+        <div className="md:flex">
+          <h1 className="w-full text-4xl font-medium mb-6">
             {activeProject
-              ? `Kanban board for ${activeProject.name}`
+              ? `✅ Kanban for ${activeProject.name}`
               : "Loading..."}
           </h1>
 
-          <div className="md:mb-4 mb-2 w-full">
+          <div className="mb-6 ml-auto w-full">
             <input
               type="text"
               placeholder="New task title"
               value={newTaskTitle}
               onChange={(e) => setNewTaskTitle(e.target.value)}
-              className="border p-2 text-base rounded md:w-1/3 w-4/5 mr-2 h-[50px]"
+              className="border p-2 text-base rounded md:w-11/12 w-4/5 h-[50px]"
             />
             <button
               onClick={handleAddTask}
-              className="bg-green-600 text-lg text-white px-4 py-2 rounded md:w-1/12 cursor-pointer h-[52px]"
+              className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer text-lg float-end w-fit h-[50px]"
             >
               Add
             </button>
@@ -278,18 +278,19 @@ export default function KanbanPage() {
       <Modal
         isOpen={!!selectedTask}
         onRequestClose={() => setSelectedTask(null)}
-        contentLabel="Task Details"
+        contentLabel="Subtasks"
         className="bg-white p-6 rounded shadow max-w-lg mx-auto mt-20 relative"
         overlayClassName="fixed inset-0 bg-black/50 flex items-start justify-center"
       >
-        <h2 className="text-2xl font-bold mb-2">{selectedTask?.title}</h2>
+        <h2 className="text-2xl font-medium mb-4">{selectedTask?.title}</h2>
 
-        <ul className="mb-4 space-y-2">
+        <ul className="mb-4 space-y-1">
           {selectedTask?.subtasks?.map((subtask, index) => (
             <li key={index} className="flex items-center justify-between">
               <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  className="accent-green-500 cursor-pointer w-4 h-4"
                   checked={subtask.done}
                   onChange={async () => {
                     await toggleSubtask({
@@ -305,7 +306,7 @@ export default function KanbanPage() {
                     setSelectedTask(updated);
                   }}
                 />
-                <span className={subtask.done ? "line-through" : ""}>
+                <span className={subtask.done ? "w-fit line-through" : "w-fit"}>
                   {subtask.title}
                 </span>
               </label>
@@ -349,7 +350,7 @@ export default function KanbanPage() {
               );
               setSelectedTask(updated);
             }}
-            className="bg-green-600 text-white px-4 py-2 rounded cursor-pointer"
+            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer"
           >
             Add
           </button>
@@ -357,7 +358,7 @@ export default function KanbanPage() {
 
         <button
           onClick={() => setSelectedTask(null)}
-          className="absolute top-0 right-2 text-gray-400 text-3xl cursor-pointer"
+          className="absolute md:top-0 md:right-3 top-[-12px] right-0 text-gray-400 text-6xl cursor-pointer"
         >
           ×
         </button>

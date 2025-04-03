@@ -254,27 +254,29 @@ export default function Projects() {
 
   return (
     <>
-      <div className="pt-0 md:pl-3 md:pr-3 md:pb-3 pl-2 pr-2">
-        <h1 className="text-4xl">Your projects</h1>
+      <div className="md:p-6 p-3">
+        <h1 className="text-4xl font-medium">💼 Your projects</h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-5 [@media(min-width:2560px)]:grid-cols-8 md:gap-4 gap-2 md:mt-4 mt-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-5 [@media(min-width:2560px)]:grid-cols-8 md:gap-4 gap-2 mt-6">
           {data.getProjects.map((project) => (
             <div
               key={project.id}
-              className="border-8 rounded-md"
+              className="border-4 rounded-md"
               style={{ borderColor: project.color, color: project.color }}
             >
-              <div className="text-2xl p-2 md:flex items-center justify-between bg-pink-100">
+              <div className="text-2xl p-3 md:flex items-center justify-between">
                 <div
-                  className="md:flex md:items-center gap-1"
+                  className="md:w-2/3 md:flex md:items-center gap-1"
                   onClick={() => setInfoProject(project)}
                 >
-                  <strong>{project.name}</strong>
+                  {project.name}
                   {project.isActive && (
-                    <span className="text-green-500 text-xl pl-1">🌟</span>
+                    <span className="text-green-500 text-xl pl-1 mt-[1px]">
+                      🌟
+                    </span>
                   )}
                 </div>
-                <div className="md:inline flex md:mt-0 mt-[-24px] md:ml-0 ml-24">
+                <div className="md:w-1/3">
                   <button
                     onClick={() => setInfoProject(project)}
                     className="cursor-pointer text-xl text-indigo-600 md:ml-1"
@@ -303,7 +305,9 @@ export default function Projects() {
                       );
                       if (!confirmDelete) return;
 
-                      await deleteProject({ variables: { projectId: project.id } });
+                      await deleteProject({
+                        variables: { projectId: project.id },
+                      });
                       toast.success("Project deleted");
                       refetch();
                     }}
@@ -318,13 +322,15 @@ export default function Projects() {
           ))}
         </div>
 
-        <h2 className="text-xl md:mt-40 mt-6">Add new project</h2>
+        <h2 className="text-2xl font-medium mt-6">Add new project</h2>
         <div className="mt-2 md:flex md:justify-between w-full md:gap-2">
           <input
             type="text"
             placeholder="Name"
             value={newProject.name}
-            onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+            onChange={(e) =>
+              setNewProject({ ...newProject, name: e.target.value })
+            }
             className="border p-2 w-full h-[50px] md:mb-0 mb-2"
           />
           <input
@@ -333,11 +339,11 @@ export default function Projects() {
             onChange={(e) =>
               setNewProject({ ...newProject, color: e.target.value })
             }
-            className="border p-2 cursor-pointer md:w-[100px] w-full h-[50px] md:mb-0 mb-2"
+            className="border p-2 cursor-pointer md:w-[50px] w-full h-[50px] md:mb-0 mb-2"
           />
           <button
             onClick={handleAddProject}
-            className="cursor-pointer bg-green-600 text-white p-2 h-[50px] md:mb-0 mb-40 md:w-fit w-full"
+            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer h-[50px] md:mb-0 mb-40 md:w-fit w-full"
           >
             Add
           </button>
@@ -429,7 +435,9 @@ export default function Projects() {
               <p className="text-2xl text-red-600 mt-[-4px]">❌</p>
             </button> */}
             <div className="mb-4 p-6">
-              <h2 className="text-2xl font-semibold mb-4">{infoProject.name}</h2>
+              <h2 className="text-2xl font-semibold mb-4">
+                {infoProject.name}
+              </h2>
               {infoProject.color && (
                 <p className="flex items-center gap-2 mb-4">
                   <span className="font-semibold w-2/12">Color</span>

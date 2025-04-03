@@ -83,8 +83,10 @@ export default function KanbanOverview() {
   if (loadingProjects) return <p>Loading projects...</p>;
 
   return (
-    <div className="pb-5">
-      <h1 className="text-2xl font-bold mb-1">Kanban boards for all projects</h1>
+    <div className="md:p-6">
+      <h1 className="text-4xl font-medium md:mb-6 md:m-0 m-3">
+        ✅ Kanban overview
+      </h1>
 
       {boards.map(({ project, tasks }) => {
         const grouped = { todo: [], doing: [], done: [] };
@@ -92,40 +94,40 @@ export default function KanbanOverview() {
         const isCollapsed = collapsedBoards[project.id];
 
         return (
-          <div key={project.id} className="rounded shadow-sm">
+          <div key={project.id} className="rounded shadow-sm mb-3">
             <button
               onClick={() => toggleCollapse(project.id)}
-              className="w-full text-left pl-3 pr-3 pb-1 bg-pink-100 hover:bg-gray-200 font-semibold text-lg flex justify-between items-center"
+              className="w-full text-left capitalize p-3 bg-green-100 hover:bg-green-200 font-semibold text-lg flex justify-between items-center"
               style={{ color: project.color }}
             >
               {project.name}
-              <span className="text-sm text-gray-500">
+              <span className="text-base text-gray-500">
                 {isCollapsed ? "▼ Show" : "▲ Hide"}
               </span>
             </button>
 
             {!isCollapsed && (
-              <div className="pl-2 pr-2 bg-pink-100 pb-1">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 bg-pink-100">
+              <div className="pl-3 pr-3 pb-3 bg-green-100">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-green-100">
                   {["todo", "doing", "done"].map((status) => (
                     <div
                       key={status}
-                      className="bg-gray-100 pt-3 pl-3 pr-3 pb-2 rounded shadow min-h-[20px]"
+                      className="bg-yellow-100 pt-3 pl-3 pr-3 pb-2 rounded shadow min-h-[20px]"
                     >
-                      <h3 className="capitalize font-semibold">
-                        {status}
-                      </h3>
+                      <h3 className="mb-2 ml-1 capitalize font-semibold">{status}</h3>
                       {grouped[status].length > 0 ? (
                         grouped[status].map((task) => (
                           <div
                             key={task.id}
-                            className="bg-white pl-2 pr-2 pt-1 pb-1 mb-1 rounded shadow text-sm"
+                            className="bg-white capitalize p-2 mb-2 rounded shadow text-sm"
                           >
                             {task.title}
                           </div>
                         ))
                       ) : (
-                        <p className="text-xs text-gray-400 italic pb-3">No tasks</p>
+                        <p className="text-xs text-gray-400 italic p-2 pl-1">
+                          No tasks
+                        </p>
                       )}
                     </div>
                   ))}

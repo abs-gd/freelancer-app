@@ -81,8 +81,8 @@ function Navbar() {
         href={href}
         className={`px-3 py-3 ${
           isActive
-            ? "bg-pink-500 text-white"
-            : "text-gray-700 hover:bg-pink-200"
+            ? "bg-green-600 text-white"
+            : "text-gray-800 hover:bg-green-200"
         }`}
         onClick={() => setMenuOpen(false)} // close menu on nav
       >
@@ -100,8 +100,8 @@ function Navbar() {
         href={href}
         className={`mb-1 text-xl pl-4 pr-4 pt-2 pb-2 ${
           isActive
-            ? "bg-pink-500 text-white"
-            : "text-gray-700 hover:bg-pink-200"
+            ? "bg-green-600 text-white"
+            : "text-gray-800 hover:bg-green-200"
         }`}
         onClick={() => setMenuOpen(false)} // close menu on nav
       >
@@ -140,7 +140,7 @@ function Navbar() {
             <NavLink href="/income-statistics">Income stats</NavLink>
             <button
               onClick={handleLogout}
-              className="text-red-500 font-medium cursor-pointer hover:bg-pink-200 p-3"
+              className="text-red-500 font-medium cursor-pointer hover:bg-red-200 p-3"
             >
               Logout
             </button>
@@ -148,8 +148,8 @@ function Navbar() {
 
           {/* Mobile menu */}
           {menuOpen && (
-            <div className="absolute top-13 left-0 w-full h-full bg-white shadow-md sm:hidden z-50">
-              <div className="flex flex-col pl-0 pt-3 pr-0 pb-4 space-y-2">
+            <div className="absolute top-17 left-0 w-full h-full bg-white shadow-md sm:hidden z-50">
+              <div className="flex flex-col pl-0 pt-0 pr-0 pb-4 space-y-2">
                 <NavLinkMobile href="/dashboard">Dashboard</NavLinkMobile>
                 <NavLinkMobile href="/dailies-overview">
                   Dailies all
@@ -176,7 +176,7 @@ function Navbar() {
           <div>
             {data && data.getProjects.length > 0 && (
               <select
-                className="text-pink-400 font-bold cursor-pointer bg-pink-100 p-3 hover:bg-fuchsia-200 md:h-auto h-17 md:w-auto"
+                className="text-green-700 font-bold cursor-pointer bg-green-100 p-3 hover:bg-green-200 md:h-auto h-17 md:w-auto"
                 onChange={(e) => handleSwitch(e.target.value)}
                 value={activeProject ? activeProject.id : ""}
               >

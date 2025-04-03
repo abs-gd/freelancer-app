@@ -137,8 +137,8 @@ export default function FavoritesPage() {
   };
 
   return (
-    <div className="md:p-5 p-2 md:w-2/3 m-auto">
-      <h1 className="text-2xl font-bold md:mb-4 mb-2">Favorites</h1>
+    <div className="md:p-6 p-3">
+      <h1 className="text-4xl font-medium mb-6">⭐ Favorites</h1>
 
       {/* Category Tabs */}
       <div className="flex gap-3 mb-4 flex-wrap">
@@ -146,10 +146,10 @@ export default function FavoritesPage() {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-2 rounded ${
+            className={`px-4 py-2 rounded capitalize ${
               selectedCategory === cat
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 cursor-pointer"
+                ? "bg-green-600 text-white"
+                : "bg-green-200 cursor-pointer"
             }`}
           >
             {cat}
@@ -160,8 +160,8 @@ export default function FavoritesPage() {
       {/* Favorites List */}
       {selectedCategory && (
         <div className="mb-6">
-          <h2 className="text-xl mb-2 md:block hidden">{selectedCategory}</h2>
-          <ul className="space-y-2">
+          {/*<h2 className="text-xl mb-2 capitalize md:block hidden">{selectedCategory}</h2>*/}
+          <ul className="space-y-1">
             {grouped[selectedCategory]?.map((fav) => (
               <li
                 key={fav.id}
@@ -235,7 +235,7 @@ export default function FavoritesPage() {
                         title={fav.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 text-lg cursor-pointer"
+                        className="capitalize text-blue-600 text-lg cursor-pointer"
                       >
                         {fav.title}
                       </a>
@@ -250,8 +250,8 @@ export default function FavoritesPage() {
       )}
 
       {/* Add New Favorite */}
-      <div className="w-full m-auto bg-gray-100 p-4 rounded shadow">
-        <h3 className="text-xl text-center font-semibold mb-4">Add Favorite</h3>
+      <div className="w-full mt-20 bg-green-100 p-4 rounded shadow">
+        <h3 className="text-2xl text-center font-medium mb-4">Add favorite</h3>
         <div className="md:flex md:justify-between md:gap-2">
           <input
             type="text"
@@ -276,7 +276,7 @@ export default function FavoritesPage() {
           />
           <button
             onClick={handleAddFavorite}
-            className="bg-green-600 text-white px-4 h-[50px] rounded cursor-pointer md:w-fit w-full"
+            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer h-[50px] md:w-fit w-full"
           >
             Add
           </button>

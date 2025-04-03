@@ -232,9 +232,9 @@ export default function Dashboard() {
 
   function StatBox({ label, value }) {
     return (
-      <div className="bg-white shadow rounded md:mb-4 mb-2 p-2 grid grid-cols-2 gap-4 hover:bg-pink-200">
-        <h3 className="text-gray-600 text-sm mt-2">{label}</h3>
-        <p className="text-2xl font-semibold">€{value.toFixed(2)}</p>
+      <div className="bg-white shadow rounded md:mb-3 mb-2 p-2 grid grid-cols-2 gap-4 hover:bg-green-200">
+        <h3 className="text-gray-600 text-lg">{label}</h3>
+        <p className="text-2xl font-semibold mt-[-2px]">€{value.toFixed(2)}</p>
       </div>
     );
   }
@@ -243,20 +243,20 @@ export default function Dashboard() {
   if (error) return <p>Error loading data.</p>;
 
   return (
-    <div className="md:p-5 p-2">
+    <div className="md:p-6 p-3">
       {activeProject ? (
         <>
-          <div className="flex gap-1 items-center md:mb-6 mb-2">
+          <div className="flex gap-1 items-center mb-6">
             <h1
               className="text-4xl font-medium"
               style={{ color: activeProject.color }}
             >
-              {activeProject.name}
+              🏢 {activeProject.name}
             </h1>
           </div>
           <div className="md:flex md:gap-5">
             <div className="md:w-3/5 w-full">
-              <h2 className="md:text-3xl font-semibold md:mb-2 text-2xl mb-2 md:ml-0 ml-[-3px] md:block hidden">
+              <h2 className="md:text-2xl font-semibold md:mb-4 text-2xl mb-2 md:ml-0 ml-[-3px] md:block hidden">
                 🗓️ Daily Tasks
               </h2>
               {dailyTasksLoading ? (
@@ -291,7 +291,7 @@ export default function Dashboard() {
                           >
                             <div className="md:flex md:items-center md:gap-3 w-full">
                               <input
-                                className="cursor-pointer md:w-5 md:h-5 w-8 h-8 md:mt-0 md:inline block mt-[-30px]"
+                                className="accent-green-500 cursor-pointer md:w-5 md:h-5 w-8 h-8 md:mt-0 md:inline block mt-[-30px]"
                                 type="checkbox"
                                 checked={isDone}
                                 onChange={async () => {
@@ -381,7 +381,7 @@ export default function Dashboard() {
                                     dailyTasksRefetch();
                                   }
                                 }}
-                                className="text-red-500 text-l cursor-pointer md:mt-[1px] md:inline block md:ml-0 mt-[-25px] ml-82"
+                                className="text-red-500 text-l cursor-pointer md:mt-[1px] md:inline block md:ml-[-10px] mt-[-25px] ml-82"
                                 title="Delete task"
                               >
                                 ❌
@@ -401,7 +401,7 @@ export default function Dashboard() {
                       className="border p-2 rounded flex-1"
                     />
                     <button
-                      className="bg-green-700 text-white px-4 py-2 rounded cursor-pointer"
+                      className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded cursor-pointer"
                       onClick={async () => {
                         if (!newDailyTaskTitle.trim()) return;
                         await addDailyTask({
@@ -421,8 +421,8 @@ export default function Dashboard() {
               )}
             </div>
             <div className="md:w-1/5 md:mt-0 mt-10">
-              <h2 className="md:text-3xl font-semibold md:mb-3 text-2xl mb-2 md:ml-0 ml-[-3px]">
-                ✅ Doing
+              <h2 className="md:text-2xl font-semibold md:mb-4 text-2xl mb-2 md:ml-0 ml-[-3px]">
+                ✅ Tasks in doing
               </h2>
               {loadingTasks ? (
                 <p>Loading...</p>
@@ -431,7 +431,7 @@ export default function Dashboard() {
                   {doingTasks.map((task) => (
                     <li
                       key={task.id}
-                      className="bg-yellow-100 border-l-4 border-yellow-500 p-2 rounded hover:bg-pink-200"
+                      className="bg-green-100 border-l-4 border-green-300 p-2 rounded hover:bg-green-200"
                     >
                       {task.title}
                     </li>
@@ -443,8 +443,8 @@ export default function Dashboard() {
             </div>
             {incomeStats && (
               <div className="md:w-1/5 md:mt-0 mt-10 md:mb-0 mb-40">
-                <h2 className="md:text-3xl font-semibold md:mb-3 text-2xl mb-2 md:ml-0 ml-[-3px]">
-                  💸 Income
+                <h2 className="md:text-2xl font-semibold md:mb-4 text-2xl mb-2 md:ml-0 ml-[-3px]">
+                  💸 Global income
                 </h2>
                 <StatBox label="Today" value={incomeStats.todayTotal} />
                 <StatBox label="7 Days" value={incomeStats.last7DaysTotal} />

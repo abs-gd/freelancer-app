@@ -13,8 +13,8 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl">Welcome to your freelancer app!</h1>
+    <div className="p-6 flex flex-col items-center justify-center h-screen">
+      <h1 className="text-3xl text-center mb-6">Welcome to your freelancer app!</h1>
       <p>You are logged in!</p>
     </div>
   );
