@@ -212,7 +212,9 @@ const GetDailyTasksQuery = {
   args: {
     projectId: { type: GraphQLString },
   },
-  async resolve(_, { projectId }) {
+  async resolve(_, { projectId }, context) {
+    authMiddleware(context);
+
     const today = new Date().toISOString().slice(0, 10);
     const tasks = await DailyTask.find({ projectId });
 
@@ -231,7 +233,9 @@ const GetDailyTasksQuery = {
 /* Get all daily tasks in all projects */
 const GetAllDailyTasksQuery = {
   type: new GraphQLList(DailyTaskType),
-  async resolve() {
+  async resolve(_, __, context) {
+    authMiddleware(context);
+
     return await DailyTask.find({});
   },
 };
@@ -243,7 +247,9 @@ const GetIncomeQuery = {
     page: { type: GraphQLInt },
     limit: { type: GraphQLInt },
   },
-  async resolve(_, { page = 1, limit = 250 }) {
+  async resolve(_, { page = 1, limit = 250 }, context) {
+    authMiddleware(context);
+
     return await Income.find({})
       .sort({ date: -1 })
       .skip((page - 1) * limit)
@@ -739,7 +745,9 @@ const AddDailyTaskMutation = {
     projectId: { type: GraphQLString },
     title: { type: GraphQLString },
   },
-  async resolve(_, { projectId, title }) {
+  async resolve(_, { projectId, title }, context) {
+    authMiddleware(context);
+
     const today = new Date().toISOString().slice(0, 10);
 
     const newTask = await DailyTask.create({
@@ -758,7 +766,9 @@ const ToggleDailyTaskMutation = {
   args: {
     taskId: { type: GraphQLString },
   },
-  async resolve(_, { taskId }) {
+  async resolve(_, { taskId }, context) {
+    authMiddleware(context);
+
     const today = new Date().toISOString().slice(0, 10);
     const task = await DailyTask.findById(taskId);
 
@@ -780,7 +790,9 @@ const DeleteDailyTaskMutation = {
   args: {
     taskId: { type: GraphQLString },
   },
-  async resolve(_, { taskId }) {
+  async resolve(_, { taskId }, context) {
+    authMiddleware(context);
+
     await DailyTask.findByIdAndDelete(taskId);
     return "Task deleted";
   },
@@ -793,7 +805,9 @@ const UpdateDailyTaskTitleMutation = {
     taskId: { type: GraphQLString },
     title: { type: GraphQLString },
   },
-  async resolve(_, { taskId, title }) {
+  async resolve(_, { taskId, title }, context) {
+    authMiddleware(context);
+
     return await DailyTask.findByIdAndUpdate(taskId, { title }, { new: true });
   },
 };
@@ -807,7 +821,9 @@ const AddIncomeMutation = {
     site_or_stream: { type: GraphQLString },
     product: { type: GraphQLString },
   },
-  async resolve(_, args) {
+  async resolve(_, args, context) {
+    authMiddleware(context);
+
     return await Income.create(args);
   },
 };
@@ -818,7 +834,9 @@ const DeleteIncomeMutation = {
   args: {
     id: { type: GraphQLString },
   },
-  async resolve(_, { id }) {
+  async resolve(_, { id }, context) {
+    authMiddleware(context);
+
     await Income.findByIdAndDelete(id);
     return true;
   },
@@ -834,7 +852,9 @@ const UpdateIncomeMutation = {
     site_or_stream: { type: GraphQLString },
     product: { type: GraphQLString },
   },
-  async resolve(_, args) {
+  async resolve(_, args, context) {
+    authMiddleware(context);
+    
     const { id, ...updates } = args;
     return await Income.findByIdAndUpdate(id, updates, { new: true });
   },
